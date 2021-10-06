@@ -1,0 +1,27 @@
+#' vweights
+#'
+#' Computation of non-negative weights for cohesion function used to define
+#' the law for random partition, that is of Gibbs type. The implementation has
+#' been done in \code{C++} by R. Argiento. The wrap to the code has been done
+#' by M.Pedone through the use of \code{Rcpp} and \code{RcppArmadillo}.
+#' @author Matteo Pedone, Raffaele Argiento
+#'
+#' Maintainer: Matteo Pedone \email{matteo.pedone@@unifi.it}
+#'
+#' @references
+#' Lijoi A., Mena R. H., Pruenster I. (2007). Controlling the
+#' reinforcement in Bayesian non-parametric mixture models.
+#' \emph{J. R. Statist. Soc. B}, \strong{69}(4), 715-740.
+#' \url{https://rss.onlinelibrary.wiley.com/doi/full/10.1111/j.1467-9868.2007.00609.x}
+#'
+#' Argiento, R., Guglielmi, A., Pievatolo, A. (2010). Bayesian density
+#' estimation and model selection using nonparametric hierarchical mixtures.
+#' \emph{CSDA}, \strong{54},(4), 816-832.
+#' \url{https://www.sciencedirect.com/science/article/pii/S0167947309004058}
+#'
+#' @docType package
+#' @name vweights
+#'
+#' @useDynLib vweights, .registration = TRUE
+#' @importFrom Rcpp sourceCpp
+NULL

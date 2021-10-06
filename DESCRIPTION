@@ -1,0 +1,14 @@
+Package: vweights
+Type: Package
+Title: Computes weights for NGG measure
+Version: 1.0
+Date: 2021-10-06
+Author: R. Argiento, M. Pedone
+Maintainer: M. Pedone <matteo.pedone@unifi.it>
+Description: Computation of non-negative weights for cohesion function used to define the law for random partition, that is of Gibbs type.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 1.0.7)
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 7.1.1
