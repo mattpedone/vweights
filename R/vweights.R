@@ -1,7 +1,7 @@
 #' vweights
 #'
 #' Computation of non-negative weights for cohesion function used to define
-#' the law for random partition, that is of Gibbs type. The implementation has
+#' a law for random partition, that is of Gibbs type. The implementation has
 #' been done in \code{C++} by R. Argiento. The wrap to the code has been done
 #' by M.Pedone through the use of \code{Rcpp} and \code{RcppArmadillo}.
 #' @author Matteo Pedone, Raffaele Argiento

@@ -15,6 +15,13 @@
 #include <vector>
 #include <string>
 
+//' Computes the weights
+//'
+//' @param Locn Number of observation
+//' @param Locsig Sigma parameter
+//' @param Lockappa Kappa parameter
+//' @return vector of length Locn
+//' @export
 // [[Rcpp::export]]
 arma::vec computev(int Locn, double Locsig, double Lockappa){
   //This function calls a main! Here I only set the parameters
