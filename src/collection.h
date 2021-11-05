@@ -26,6 +26,7 @@ class COLLEZIONE{
 		/*getter Anche questi non li faccio */
 
 		arma::vec main_calcola_Vnk(void);
+		arma::vec main_calcola_prior_nclust(void);
 
 		private:
 		long double omega;

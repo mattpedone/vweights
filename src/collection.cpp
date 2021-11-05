@@ -1,5 +1,6 @@
 #include "collection.h"
 #include "trapezoidal_rule.h"
+#include "gensterling_rec.h"
 
 #include <RcppArmadillo.h>
 
@@ -59,3 +60,42 @@ arma::vec
 	}
 	  
 	}
+
+arma::vec
+  COLLEZIONE::main_calcola_prior_nclust(void){
+    {
+    //This line should be all, what you need to use infinity in the code.
+    static_assert(std::numeric_limits<double>::is_iec559, "IEEE 754 required");
+   //This class uses a recursive formula to compute the generalized
+    //Stirling number of second kind in log scale.
+    Gen_stirling logStirling(n,sig,true);
+
+    //The vector of Stirling number S(n,k,sigma) k=1,...,n
+    //is saved in a vector via a getter, be careful because
+    // vectors in C++ start from 0.
+    
+    std::vector<long double> logSt=logStirling.output();
+    
+    // Here I compute the log(integral) in the V_{k,n} formula by a
+    // Simpson quadrature rule!
+    Integrale_trapezi logsimpson(kappa,sig,omega,n);
+    // Questo dovrebbe aprire un file di uscita nella catella path
+    //std::ofstream FILE(path, std::ios::out | std::ofstream::binary);
+    
+    //long double cumulata=0;
+    //std::vector<long double> prob(n,0);
+    arma::vec prob(n);
+    for(int kk=1;kk<=n;kk++){
+      prob[kk-1]=std::exp(kappa/sig*std::pow(omega,sig)+kk*std::log(kappa)-(kk+1)*std::log(sig)-gsl_sf_lngamma(n)+logsimpson.output()[kk-1]+logSt[kk-1]);
+      //cumulata += prob[kk-1];
+      //std::cout<<prob[kk-1] <<std::endl;
+      }
+    
+    //std::cout<<"La cumulata è pari a "<< cumulata <<std::endl;
+
+    // I write the vector of long double prob in the file prob.out
+    //UTIL::Ldouble2file(prob,"prob.out");
+   
+    return prob;
+    }
+  }
