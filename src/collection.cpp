@@ -1,6 +1,6 @@
 #include "collection.h"
 #include "trapezoidal_rule.h"
-#include "gensterling_rec.h"
+#include "genstirling_rec.h"
 
 #include <RcppArmadillo.h>
 
