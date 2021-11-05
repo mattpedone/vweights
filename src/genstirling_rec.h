@@ -19,12 +19,12 @@
 
 // In particolare mi creerei il vettore di lunghezza n che conitiene S(n,k,sig) k=0,...,n
 //
-class Gen_stirling
-{
+class Gen_stirling{
+  
 public:
   //Costruttore
   Gen_stirling(){
-    std::cout<<"Costruttore vuoto Stirling"<<std::endl;
+    //std::cout<<"Costruttore vuoto Stirling"<<std::endl;
   }
   Gen_stirling(unsigned long int const &n, long  double const &sig);
   // Costruttore specificando log scale
@@ -48,7 +48,7 @@ public:
   
   /* printer non so se si usa */
   void a_che_passo_sono(){
-    std::cout<<"Sono al passo="<<passo<<std::endl;
+    //std::cout<<"Sono al passo="<<passo<<std::endl;
   }
   
 private: 

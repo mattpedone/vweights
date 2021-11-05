@@ -12,3 +12,14 @@ computev <- function(Locn, Locsig, Lockappa) {
     .Call('_vweights_computev', PACKAGE = 'vweights', Locn, Locsig, Lockappa)
 }
 
+#' Computes the prior probability mass function for the number of clusters
+#'
+#' @param Locn Number of observation
+#' @param Locsig Sigma parameter
+#' @param Lockappa Kappa parameter
+#' @return vector of length Locn
+#' @export
+computepnclu <- function(Locn, Locsig, Lockappa) {
+    .Call('_vweights_computepnclu', PACKAGE = 'vweights', Locn, Locsig, Lockappa)
+}
+

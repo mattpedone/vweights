@@ -24,9 +24,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// computepnclu
+arma::vec computepnclu(int Locn, double Locsig, double Lockappa);
+RcppExport SEXP _vweights_computepnclu(SEXP LocnSEXP, SEXP LocsigSEXP, SEXP LockappaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type Locn(LocnSEXP);
+    Rcpp::traits::input_parameter< double >::type Locsig(LocsigSEXP);
+    Rcpp::traits::input_parameter< double >::type Lockappa(LockappaSEXP);
+    rcpp_result_gen = Rcpp::wrap(computepnclu(Locn, Locsig, Lockappa));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_vweights_computev", (DL_FUNC) &_vweights_computev, 3},
+    {"_vweights_computepnclu", (DL_FUNC) &_vweights_computepnclu, 3},
     {NULL, NULL, 0}
 };
 

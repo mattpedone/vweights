@@ -11,22 +11,57 @@
 /// Per avere infinito
 #include <limits>
 
-#include <gsl/gsl_errno.h>
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_roots.h>
+//#include <gsl/gsl_errno.h>
+//#include <gsl/gsl_math.h>
+//#include <gsl/gsl_roots.h>
 #include <gsl/gsl_sf_gamma.h>
-#include <gsl/gsl_rng.h>
-#include <gsl/gsl_randist.h>
-#include <gsl/gsl_cdf.h>
+//#include <gsl/gsl_rng.h>
+//#include <gsl/gsl_randist.h>
+//#include <gsl/gsl_cdf.h>
 
 
 //// Questa procedura qui sotto non so a cosa serva.
 #pragma STDC FENV_ACCESS on
 
+// Definisco prima il costruttore a 2 parametri, in questo caso
+// do di default la scala naturale
+Gen_stirling::
+  Gen_stirling(unsigned long int const &n, long  double const &sig){
+    M_n= n;
+    M_sig=sig;
+    
+    M_flag=false; // In questo caso faccio il conto nella scala naturale
+    
+    // Initialize passo
+    passo=0;
+    // Initialize precedete and successivo
+    precedente.assign(M_n+1,0); // Quando faccio il conto in scala naturale
+    precedente[0]=1;
+    //parto dal vettore con tutti zeri tranne il primo elemento che è uno
+    
+    
+    // Successivo lo inizializzo a zero!
+    successivo.assign(M_n+1,0);
+    
+    //std::cout<<"CIAO DAL COSTRUTTORE"<<std::endl;
+    //chiama la funzione principale out;
+    calcola_ultimo();
+    //std::cout<<"Ho fatto i miei conti"<<std::endl;
+    
+    //  	for(int ii=0;ii<=M_n;ii++){
+    //  		std::cout<<"precedente_finale["<<ii<<"]="<<precedente[ii]<<std::endl;
+    //  	}
+    // 	
+    // 	std::cout<<"Sono qui e la dimesione di precedente è "<<precedente.size()<<std::endl;
+    // 
+    
+  }
+
 // Definisco ora il costruttore a 3 parametri, in questo caso
 // posso scegliere la scala logaritmica
 Gen_stirling::
-  Gen_stirling(unsigned long int const &n, long  double const &sig, bool const &log_scale){
+  Gen_stirling(unsigned long int const &n, long  double const &sig, bool const &log_scale)
+  {
     M_n= n;
     M_sig=sig;
     
@@ -60,8 +95,8 @@ Gen_stirling::
 // by the (-1)^(n-k) factor so it holds for the S(n,k,sig) representation
 
 void
-Gen_stirling::
-formula267_modificata(void){
+  Gen_stirling::
+    formula267_modificata(void){
 
 	// In entrata nn è pari a passo
 	int nn= passo;
@@ -79,8 +114,8 @@ formula267_modificata(void){
 // This function implement formula 267 in log scale Charambides modified 
 // by the (-1)^(n-k) factor so it holds for the S(n,k,sig) representation
 void 
-Gen_stirling::
-formula267_log(void){
+  Gen_stirling::
+    formula267_log(void){
 	// In entrata nn è pari a passo
 	int nn=passo;
 	// ora posso incrementare passo
@@ -100,8 +135,8 @@ formula267_log(void){
 }
 
 void 
-Gen_stirling::
-fai_un_passo(std::vector<long double> &da_aggiornare){
+  Gen_stirling::
+    fai_un_passo(std::vector<long double> &da_aggiornare){
 
 	// In entrata nn è pari alla dimensione attuale di da_aggiornare
 	int nn=da_aggiornare.size();
@@ -126,8 +161,8 @@ fai_un_passo(std::vector<long double> &da_aggiornare){
 }
 
 void
-Gen_stirling::
-calcola_ultimo(void){
+  Gen_stirling::
+    calcola_ultimo(void){
 
 	if(!M_flag){
 		while(passo<M_n){
@@ -155,23 +190,23 @@ Gen_lstirling_matrice(unsigned long int const &n, long  double const &sig, std::
 	int M_n = n;
 	long double M_sig = sig;
 	
-	std::cout<<__LINE__<<" CIAO DALL FUNZIONE per la Matrice"<<std::endl;
+	//std::cout<<__LINE__<<" CIAO DALL FUNZIONE per la Matrice"<<std::endl;
 	double infinito = std::numeric_limits<long double>::infinity();
 
 	// Initialize the first row of the matrix LogStirling
 
-	std::cout<<__LINE__<<" CIAO DALL FUNZIONE per la Matrice"<<std::endl;
+	//std::cout<<__LINE__<<" CIAO DALL FUNZIONE per la Matrice"<<std::endl;
 
-	std::cout<<(LogStirling[0]).size()<<std::endl;
+	//std::cout<<(LogStirling[0]).size()<<std::endl;
 
-	std::cout<<__LINE__<<"(LogStirling[0])[0]";
-	std::cout <<"\n";
-	std::cout << (LogStirling[0])[0]<<std::endl;
+	//std::cout<<__LINE__<<"(LogStirling[0])[0]";
+	//std::cout <<"\n";
+	//std::cout << (LogStirling[0])[0]<<std::endl;
 
 	(LogStirling[0])[0] =std::log(M_sig);
 	
-	std::cout<<__LINE__<<" CIAO DALL FUNZIONE per la Matrice"<<std::endl;
-	std::cout << (LogStirling[0])[0]<<std::endl;
+	//std::cout<<__LINE__<<" CIAO DALL FUNZIONE per la Matrice"<<std::endl;
+	//std::cout << (LogStirling[0])[0]<<std::endl;
 
 	//parto dal vettore con tutti zeri tranne il primo elemento che è uno
 
@@ -200,9 +235,9 @@ Gen_lstirling_matrice(unsigned long int const &n, long  double const &sig, std::
 
 for(int i=0;i<M_n;i++){
 	for(int j=0;j<M_n;j++){
-		std::cout<< LogStirling[i][j]<<" ";
+		//std::cout<< LogStirling[i][j]<<" ";
 	}
-	std::cout<<"\n";
+	//std::cout<<"\n";
 }
 }
 
@@ -256,11 +291,11 @@ integranda (double u, void *p)
 
 	if(out>1E301){
 		out=1E300;
-		std::cout<<"ATT: +inf and u="<<u<<" k="<<k<<" lnmax="<<lnmax<<" out1="<<(k-1)*log(u)-kappa/sig*u<<std::endl;
+		//std::cout<<"ATT: +inf and u="<<u<<" k="<<k<<" lnmax="<<lnmax<<" out1="<<(k-1)*log(u)-kappa/sig*u<<std::endl;
 	}
 	if(out<-1E301){
 		out=-1E300;
-		std::cout<<"ATT: -inf"<<std::endl;
+		//std::cout<<"ATT: -inf"<<std::endl;
 	
 	}
 
@@ -365,8 +400,8 @@ calcola_lnintegrale(long unsigned int k, long unsigned int nn){
 
 		if(ERR>std::pow(10,-2))
 	{
-	std::cout<<"Warning: the error of the integration is greater than "<<std::pow(10,-2)<<": ERR= "<<ERR<<
-		" --------> lnintegrale("<<k<<")=  "<<lnintegrale<<std::endl;
+	//std::cout<<"Warning: the error of the integration is greater than "<<std::pow(10,-2)<<": ERR= "<<ERR<<
+	//	" --------> lnintegrale("<<k<<")=  "<<lnintegrale<<std::endl;
 	}
 	gsl_integration_workspace_free(w_gsl);
 	return lnintegrale;

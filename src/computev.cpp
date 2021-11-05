@@ -10,7 +10,7 @@
 #include <gsl/gsl_sf_gamma.h>
 
 #include "trapezoidal_rule.h"
-#include "genstirling_rec.h"
+//#include "genstirling_rec.h"
 #include "collection.h"
 
 #include <vector>
@@ -54,7 +54,7 @@ arma::vec computev(int Locn, double Locsig, double Lockappa){
 //' @return vector of length Locn
 //' @export
 // [[Rcpp::export]]
-arma::vec compute_pnclu(int Locn, double Locsig, double Lockappa){
+arma::vec computepnclu(int Locn, double Locsig, double Lockappa){
   //This function calls a main! Here I only set the parameters
   
   ///////////////
