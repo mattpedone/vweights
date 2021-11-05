@@ -10,7 +10,7 @@
 #include <gsl/gsl_sf_gamma.h>
 
 #include "trapezoidal_rule.h"
-#include "gensterling_rec.h"
+#include "genstirling_rec.h"
 #include "collection.h"
 
 #include <vector>
